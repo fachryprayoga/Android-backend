@@ -42,31 +42,42 @@ public class LoginActivity extends BaseActivity{
         call.enqueue(new retrofit2.Callback<Response>() {
             @Override
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                if(response.isSuccessful()){
+                    Response res = response.body();
+                    if
+                }
                 
             }
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
-
+                Toast.makeText(LoginActivity.this,
+                        "Connection Refused",
+                        Toast.LENGTH_LONG)
+                        .show();
             }
+        } else {
+            Toast.makeText(LoginActivity.this,
+                    "Connection Refused"
+                    Toast.LENGTH_LONG)
+                    .show();
         });
 
-        if(validatePwd()){
-                String U = username.getText().toString();
-                Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                i.putExtra("username",U);
-                startActivity(i);
-                finish();
-            } else{
-            Toast.makeText(this, "Username/Password is Invalid", Toast.LENGTH_LONG)
-                    .show();
-        };
+//        if(validatePwd()){
+//                String U = username.getText().toString();
+//                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+//                i.putExtra("username",U);
+//                startActivity(i);
+//                finish();
+//            } else{
+//            Toast.makeText(this, "Username/Password is Invalid", Toast.LENGTH_LONG)
+//                    .show();
+//        };
     }
     private boolean validatePwd() {
         String u = username.getText().toString();
         String p = password.getText().toString();
         Call<Response> call = getApi().dologin(u,p);
-        call.enqueue(new Callb);
         if(u.equals(UNAME) && p.equals(PWD)) {
             return true;
         }else{

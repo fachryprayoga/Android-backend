@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class BaseActivity extends AppCompatActivity {
 
     private APIService api;
-    private static final String URL = "";
+    private static final String URL = "localhost/android-backend2/web/index.php/";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
