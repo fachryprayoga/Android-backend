@@ -9,15 +9,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.IOException;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Callback;
+import retrofit2.Call;
 
 /**
  * Created by user on 19/12/2017.
  */
 
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends BaseActivity{
 
     private static final  String UNAME = "admin";
     private static final String PWD = "password";
@@ -32,6 +36,21 @@ public class LoginActivity extends AppCompatActivity{
     }
     @OnClick(R.id.btnLogin)
     void gotoLogin(){
+        String u = username.getText().toString();
+        String p = password.getText().toString();
+        Call<Response> call = getApi().dologin(u,p);
+        call.enqueue(new retrofit2.Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
+
+            }
+        });
+
         if(validatePwd()){
                 String U = username.getText().toString();
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
@@ -46,7 +65,8 @@ public class LoginActivity extends AppCompatActivity{
     private boolean validatePwd() {
         String u = username.getText().toString();
         String p = password.getText().toString();
-
+        Call<Response> call = getApi().dologin(u,p);
+        call.enqueue(new Callb);
         if(u.equals(UNAME) && p.equals(PWD)) {
             return true;
         }else{
